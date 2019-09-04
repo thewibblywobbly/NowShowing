@@ -69,8 +69,8 @@ en:
   release_date: "Release Date"
   runtime: "Runtime"
   seasons: {
-    one: "season",
-    other: "seasons"
+    one: "Season %{min}",
+    other: "Seasons %{min} - %{max}"
   }
   thanks_sentence: "Thanks for watching!"
   users: "users"
