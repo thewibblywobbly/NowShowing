@@ -60,49 +60,68 @@ class Tautulli
 	def get_popular_stats
 	  getStats = self.class.get("get_home_stats&time_range=#{$time}&stats_type=0")
 	  stats = JSON.parse(getStats.body)
+
+		top_movies = 	stats["response"]["data"].find { |elem| elem['stat_id'] == 'popular_movies' }
+		popular_tv = 	stats["response"]["data"].find { |elem| elem['stat_id'] == 'popular_tv' }
+		popular_music = stats["response"]["data"].find { |elem| elem['stat_id'] == 'popular_music' }
+		most_concurrent = stats["response"]["data"].find { |elem| elem['stat_id'] == 'most_concurrent' }
+		top_users = stats["response"]["data"].find { |elem| elem['stat_id'] == 'top_users' }
+
 	  begin
-		  if $stats.include? "m"
+		  if $stats.include? "m" && top_movies
 			# most popular movie (by play count, by user) aka "Most Watched Movie"
-			@pop_movie_id = stats["response"]["data"][1]["rows"][0]["rating_key"]
-			@pop_movie = stats["response"]["data"][1]["rows"][0]["title"]
+
+			top_movies = top_movies['rows'][0]
+
+			@pop_movie_id = top_movies["rating_key"]
+			@pop_movie = top_movies["title"]
 		  end
 	  rescue => e
 	      $logger.info("Popular Movie Stat failed")
 	  end
 	  
 	  begin
-		  if $stats.include? "v"
+		  if $stats.include? "v"&& popular_tv
 			# most popular tv show (by play count, by user) aka "Most Watched TV Show"
-			@pop_tv_id = stats["response"]["data"][3]["rows"][0]["rating_key"]
-			@pop_tv = stats["response"]["data"][3]["rows"][0]["title"]
+
+			popular_tv['rows'][0]
+
+			@pop_tv_id = popular_tv["rating_key"]
+			@pop_tv = popular_tv["title"]
 		  end
 	  rescue => e
 	      $logger.info("Popular TV Stat failed")
 	  end
 	  
 	  begin
-		  if $stats.include? "a"
+		  if $stats.include? "a" && popular_music
 			# most popular artist (by play count, by user) aka "Most Listened to Artist"
-			@pop_artist_id = stats["response"]["data"][5]["rows"][0]["rating_key"]
-			@pop_artist = stats["response"]["data"][5]["rows"][0]["title"]
+
+			popular_music = popular_music['rows'][0]
+
+			@pop_artist_id = popular_music["rating_key"]
+			@pop_artist = popular_music["title"]
 		  end
 	  rescue => e
 	      $logger.info("Popular Artist Stat failed")
 	  end
 	  
 	  begin
-		  if $stats.include? "s"
+		  if $stats.include? "s" && most_concurrent
 			# most concurrent streams
-			@streams = stats["response"]["data"][9]["rows"][0]["count"]
+
+				most_concurrent = most_concurrent['rows'][0]
+
+			@streams = most_concurrent["count"]
 		  end
 	  rescue => e
 	      $logger.info("Most Streams Stat failed")
 	  end
 	  
 	  begin
-		  if $stats.include? "u"
+		  if $stats.include? "u" && top_users
 			# top user by duration for all content
-			top_user = stats["response"]["data"][7]["rows"][0]["total_duration"]
+			top_user = top_users["rows"][0]["total_duration"]
 			hr = top_user / (60 * 60)
 			min = (top_user / 60) % 60
 			sec = top_user % 60
@@ -120,16 +139,17 @@ class Tautulli
 	attr_reader :pop_artist
 	attr_reader :streams
 	attr_reader :friendly_top_user
-	
+
 	def get_popular_day
       getDayOf = self.class.get("get_plays_by_dayofweek&time_range=#{$time}&y_axis=duration")
 	  day = JSON.parse(getDayOf.body)
+
+		movie_plays = day["response"]["data"]["series"].find { |elem| elem['name'] == 'Movies' }["data"]
 	  
 	  begin
-		  if $stats.include? "d"
+		  if $stats.include? "d" && movie_plays
 			# most watched day for movies (by duration)
-			movie_day = day["response"]["data"]["series"][1]["data"]
-			movie_day_index = movie_day.index(movie_day.max)
+			movie_day_index = movie_plays.index(movie_plays.max)
 			case movie_day_index
 			when 0
 			  @movie_day_name = "Sunday"
@@ -149,13 +169,14 @@ class Tautulli
 		  end
 	  rescue => e
 	      $logger.info("Most Watched Day for Movies Stat failed")
-	  end
+		end
+
+		tv_plays = day["response"]["data"]["series"].find { |elem| elem['name'] == 'TV' }["data"]
 	  
 	  begin
-		  if $stats.include? "D"
+		  if $stats.include? "D" && tv_plays
 			# most watched day for TV
-			tv_day = day["response"]["data"]["series"][0]["data"]
-			tv_day_index = tv_day.index(tv_day.max)
+			tv_day_index = tv_plays.index(tv_plays.max)
 			case tv_day_index
 			when 0
 			  @tv_day_name = "Sunday"
@@ -183,23 +204,25 @@ class Tautulli
     def get_popular_hour
 	  getHourOf = self.class.get("get_plays_by_hourofday&time_range=#{$time}&y_axis=duration")
 	  hour = JSON.parse(getHourOf.body)
+
+		movie_plays_hour = day["response"]["data"]["series"].find { |elem| elem['name'] == 'Movies' }["data"]
 	  
 	  begin
 		  if $stats.include? "t"
 			# most popular hour for movies (by duratioon)
-			movie_hour = hour["response"]["data"]["series"][1]["data"]
-			movie_hour_index = movie_hour.index(movie_hour.max)
+			movie_hour_index = movie_plays_hour.index(movie_plays_hour.max)
 			@friendly_movie_time = timeConvert(movie_hour_index)
 		  end
 	  rescue => e
 	      $logger.info("Popular Hour for Movies Stat failed")
-	  end
+		end
+
+		tv_plays_hour = day["response"]["data"]["series"].find { |elem| elem['name'] == 'TV' }["data"]
 	  
 	  begin
 		  if $stats.include? "T"
 			# most popular hour for tv (by duration)
-			tv_hour = hour["response"]["data"]["series"][0]["data"]
-			tv_hour_index = tv_hour.index(tv_hour.max)
+			tv_hour_index = tv_plays_hour.index(tv_plays_hour.max)
 			@friendly_tv_time = timeConvert(tv_hour_index)
 		  end
 	  rescue => e
