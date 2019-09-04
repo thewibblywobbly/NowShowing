@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d94e9b86-c341-4d93-b7d7-427b55929257" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/root/opt/config/email_body.erb" afterPath="$PROJECT_DIR$/root/opt/config/email_body.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/root/var/lib/nowshowing/locales/en.yml" afterPath="$PROJECT_DIR$/root/var/lib/nowshowing/locales/en.yml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -58,14 +58,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="email_body.erb" pinned="false" current-in-tab="true">
+      <file leaf-file-name="email_body.erb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/root/opt/config/email_body.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="451">
-              <caret line="539" column="347" lean-forward="false" selection-start-line="539" selection-start-column="347" selection-end-line="539" selection-end-column="347" />
+            <state relative-caret-position="570">
+              <caret line="546" column="25" lean-forward="true" selection-start-line="546" selection-start-column="25" selection-end-line="546" selection-end-column="25" />
               <folding>
                 <element signature="n#style#0;n#p#0;n#td#0;n#tr#0;n#table#0;n#td#0;n#tr#0;n#table#0;n#td#0;n#tr#0;n#table#1;n#center#0;n#td#0;n#tr#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="4" column="3" lean-forward="false" selection-start-line="4" selection-start-column="3" selection-end-line="4" selection-end-column="3" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -98,6 +108,7 @@
       <list>
         <option value="$PROJECT_DIR$/root/var/lib/nowshowing/locales/en.yml" />
         <option value="$PROJECT_DIR$/root/opt/config/email_body.erb" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -965,12 +976,12 @@
       <option name="presentableId" value="Default" />
       <updated>1567522691291</updated>
       <workItem from="1567522692984" duration="427000" />
-      <workItem from="1567523166893" duration="7348000" />
+      <workItem from="1567523166893" duration="7601000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7775000" />
+    <option name="totallyTimeSpent" value="8028000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -1148,11 +1159,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/root/opt/config/email_body.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="451">
-          <caret line="539" column="347" lean-forward="false" selection-start-line="539" selection-start-column="347" selection-end-line="539" selection-end-column="347" />
+        <state relative-caret-position="570">
+          <caret line="546" column="25" lean-forward="true" selection-start-line="546" selection-start-column="25" selection-end-line="546" selection-end-column="25" />
           <folding>
             <element signature="n#style#0;n#p#0;n#td#0;n#tr#0;n#table#0;n#td#0;n#tr#0;n#table#0;n#td#0;n#tr#0;n#table#1;n#center#0;n#td#0;n#tr#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="3" lean-forward="false" selection-start-line="4" selection-start-column="3" selection-end-line="4" selection-end-column="3" />
+          <folding />
         </state>
       </provider>
     </entry>
