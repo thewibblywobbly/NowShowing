@@ -81,7 +81,7 @@ class Tautulli
 	  end
 	  
 	  begin
-		  if $stats.include? "v"&& popular_tv
+		  if $stats.include? "v" && popular_tv
 			# most popular tv show (by play count, by user) aka "Most Watched TV Show"
 
 			popular_tv['rows'][0]
