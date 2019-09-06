@@ -205,7 +205,7 @@ class Tautulli
 	  getHourOf = self.class.get("get_plays_by_hourofday&time_range=#{$time}&y_axis=duration")
 	  hour = JSON.parse(getHourOf.body)
 
-		movie_plays_hour = day["response"]["data"]["series"].find { |elem| elem['name'] == 'Movies' }["data"]
+		movie_plays_hour = hour["response"]["data"]["series"].find { |elem| elem['name'] == 'Movies' }["data"]
 	  
 	  begin
 		  if $stats.include? "t"
@@ -217,7 +217,7 @@ class Tautulli
 	      $logger.info("Popular Hour for Movies Stat failed")
 		end
 
-		tv_plays_hour = day["response"]["data"]["series"].find { |elem| elem['name'] == 'TV' }["data"]
+		tv_plays_hour = hour["response"]["data"]["series"].find { |elem| elem['name'] == 'TV' }["data"]
 	  
 	  begin
 		  if $stats.include? "T"
