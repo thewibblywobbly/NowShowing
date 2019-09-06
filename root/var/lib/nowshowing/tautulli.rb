@@ -61,9 +61,9 @@ class Tautulli
 	  getStats = self.class.get("get_home_stats&time_range=#{$time}&stats_type=0")
 	  stats = JSON.parse(getStats.body)
 
-		top_movies = 	stats["response"]["data"].find { |elem| elem['stat_id'] == 'popular_movies' }
-		popular_tv = 	stats["response"]["data"].find { |elem| elem['stat_id'] == 'popular_tv' }
-		popular_music = stats["response"]["data"].find { |elem| elem['stat_id'] == 'popular_music' }
+		top_movies = 	stats["response"]["data"].find { |elem| elem['stat_id'] == 'top_movies' }
+		popular_tv = 	stats["response"]["data"].find { |elem| elem['stat_id'] == 'top_tv' }
+		popular_music = stats["response"]["data"].find { |elem| elem['stat_id'] == 'top_music' }
 		most_concurrent = stats["response"]["data"].find { |elem| elem['stat_id'] == 'most_concurrent' }
 		top_users = stats["response"]["data"].find { |elem| elem['stat_id'] == 'top_users' }
 
@@ -141,7 +141,7 @@ class Tautulli
 	attr_reader :friendly_top_user
 
 	def get_popular_day
-      getDayOf = self.class.get("get_plays_by_dayofweek&time_range=#{$time}&y_axis=duration")
+      getDayOf = self.class.get("get_plays_by_dayofweek&time_range=#{$time}&y_axis=plays")
 	  day = JSON.parse(getDayOf.body)
 
 		movie_plays = day["response"]["data"]["series"].find { |elem| elem['name'] == 'Movies' }["data"]
@@ -172,7 +172,7 @@ class Tautulli
 		end
 
 		tv_plays = day["response"]["data"]["series"].find { |elem| elem['name'] == 'TV' }["data"]
-	  
+
 	  begin
 		  if $stats.include? "D" && tv_plays
 			# most watched day for TV
